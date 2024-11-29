@@ -13,4 +13,4 @@ FROM alpine:3
 
 COPY --from=builder /app/es-keeper /usr/local/bin/es-keeper
 
-ENTRYPOINT ["/usr/local/bin/es-keeper"]
+ENTRYPOINT ["/usr/local/bin/es-keeper", "serve"]

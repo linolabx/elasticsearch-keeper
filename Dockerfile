@@ -11,8 +11,8 @@ RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o es-keeper
 
 FROM alpine:3
 
-RUN groupadd -g 1000 elasticsearch && \
-    adduser --uid 1000 --gid 1000 --home /usr/share/elasticsearch elasticsearch && \
+RUN addgroup -g 1000 elasticsearch && \
+    adduser -u 1000 -G elasticsearch -h /usr/share/elasticsearch elasticsearch && \
     adduser elasticsearch root && \
     chown -R 0:0 /usr/share/elasticsearch
 

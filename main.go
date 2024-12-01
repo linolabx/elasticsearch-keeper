@@ -48,9 +48,9 @@ func GetServeCommand() *cli.Command {
 		Usage: "start the keeper service",
 		Flags: []cli.Flag{
 			(&helpers.FlagHelper{
-				Name:     "synonyms-config-dir",
-				Usage:    "elasticsearch synonyms config directory",
-				Required: true,
+				Name:  "synonyms-config-dir",
+				Usage: "elasticsearch synonyms config directory",
+				Value: "/usr/share/elasticsearch/config/synonyms",
 			}).StringFlag(),
 			(&helpers.FlagHelper{
 				Name:     "api-key",

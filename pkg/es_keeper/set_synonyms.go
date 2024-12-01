@@ -1,4 +1,4 @@
-package main
+package es_keeper
 
 import (
 	"bytes"
@@ -18,7 +18,7 @@ type Response struct {
 	Error   string `json:"error"`
 }
 
-func (ek *EsKeeper) SetSynonyms(synonymsFileName string, synonymList *[]*[]string, indexes ...string) error {
+func (ek *ESKeeper) SetSynonyms(synonymsFileName string, synonymList *[]*[]string, indexes ...string) error {
 	if !strings.HasPrefix(synonymsFileName, "synonyms/") {
 		return fmt.Errorf("synonyms files must be placed in the synonyms/ directory")
 	}

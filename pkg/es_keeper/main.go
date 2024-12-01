@@ -1,21 +1,20 @@
-package main
+package es_keeper
 
 import (
 	"fmt"
-	"log"
 	"net/url"
 
 	"github.com/go-resty/resty/v2"
 )
 
-type EsKeeper struct {
+type ESKeeper struct {
 	resty *resty.Client
 }
 
-func NewEsKeeper(dsn string) *EsKeeper {
+func NewESKeeper(dsn string) (*ESKeeper, error) {
 	dsnUrl, err := url.Parse(dsn)
 	if err != nil {
-		log.Fatalf("invalid dsn: %s", err)
+		return nil, fmt.Errorf("invalid dsn: %s", err)
 	}
 
 	if dsnUrl.Scheme == "" {
@@ -23,11 +22,11 @@ func NewEsKeeper(dsn string) *EsKeeper {
 	}
 
 	if dsnUrl.Host == "" {
-		log.Fatalf("invalid dsn: %s", "host is required")
+		return nil, fmt.Errorf("invalid dsn: host is required")
 	}
 
 	if dsnUrl.Scheme != "http" && dsnUrl.Scheme != "https" {
-		log.Fatalf("invalid dsn: %s", "scheme must be http or https")
+		return nil, fmt.Errorf("invalid dsn: scheme must be http or https")
 	}
 
 	reqUrl := url.URL{
@@ -43,5 +42,5 @@ func NewEsKeeper(dsn string) *EsKeeper {
 		_resty.SetHeader("Authorization", fmt.Sprintf("Bearer %s", apiKey))
 	}
 
-	return &EsKeeper{resty: _resty}
+	return &ESKeeper{resty: _resty}, nil
 }
